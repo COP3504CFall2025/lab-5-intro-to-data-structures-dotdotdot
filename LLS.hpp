@@ -10,18 +10,37 @@ class LLS : public StackInterface<T> {
 private:
     LinkedList<T> list;
 public:
-    // Constructor
-    LLS();
+    LLS() {}
 
-    // Insertion
-    void push(const T& item) override;
+    void push(const T& item) override {
+        list.addHead(item);
+    }
 
-    // Deletion
-    T pop() override;
+    T pop() override {
+        if (list.getCount() == 0) {
+            throw std::out_of_range("Stack is empty");
+        }
+        T value = list.getHead()->data;
+        list.removeHead();
+        return value;
+    }
 
-    // Access
-    T peek() const override;
+    T peek() const override {
+        if (list.getCount() == 0) {
+            throw std::out_of_range("Stack is empty");
+        }
+        return list.getHead()->data;
+    }
 
-    //Getters
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override {
+        return list.getCount();
+    }
+
+    void PrintForward() {
+        list.printForward();
+    }
+
+    void PrintReverse() {
+        list.printReverse();
+    }
 };

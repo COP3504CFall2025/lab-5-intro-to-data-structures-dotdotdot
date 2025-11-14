@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 #include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
@@ -10,23 +11,14 @@ using std::size_t;
 template<typename T>
 class ABS : public StackInterface<T> {
 public:
-    // Big 5 + Parameterized Constructor
-    ABS() : capacity_(0), curr_size_(0), array_(nullptr) {}
+    ABS() : capacity_(1), curr_size_(0), array_(new T[1]) {}
     explicit ABS(const size_t capacity) : capacity_(capacity), curr_size_(0) {
-        if (capacity_ == 0) {
-            array_ = nullptr;
-        } else {
-            array_ = new T[capacity_];
-        }
+        array_ = new T[capacity_];
     }
     ABS(const ABS& other) : capacity_(other.capacity_), curr_size_(other.curr_size_) {
-        if (capacity_ == 0) {
-            array_ = nullptr;
-        } else {
-            array_ = new T[capacity_];
-            for (size_t i = 0; i < curr_size_; ++i) {
-                array_[i] = other.array_[i];
-            }
+        array_ = new T[capacity_];
+        for (size_t i = 0; i < curr_size_; ++i) {
+            array_[i] = other.array_[i];
         }
     }
     ABS& operator=(const ABS& rhs) {
@@ -34,13 +26,9 @@ public:
             delete[] array_;
             capacity_ = rhs.capacity_;
             curr_size_ = rhs.curr_size_;
-            if (capacity_ == 0) {
-                array_ = nullptr;
-            } else {
-                array_ = new T[capacity_];
-                for (size_t i = 0; i < curr_size_; ++i) {
-                    array_[i] = rhs.array_[i];
-                }
+            array_ = new T[capacity_];
+            for (size_t i = 0; i < curr_size_; ++i) {
+                array_[i] = rhs.array_[i];
             }
         }
         return *this;
@@ -62,23 +50,12 @@ public:
         }
         return *this;
     }
-    ~ABS() noexcept override {
+    ~ABS() {
         delete[] array_;
     }
 
-    // Get the number of items in the ABS
     [[nodiscard]] size_t getSize() const noexcept override {
         return curr_size_;
-    }
-
-    // Get the max size of the ABS
-    [[nodiscard]] size_t getMaxCapacity() const noexcept override {
-        return capacity_;
-    }
-
-    // Return underlying data for the stack
-    [[nodiscard]] T* getData() const noexcept override {
-        return array_;
     }
 
     // Push item onto the stack
@@ -111,6 +88,20 @@ public:
         T value = array_[curr_size_ - 1];
         --curr_size_;
         return value;
+    }
+
+    void PrintForward() {
+        for (size_t i = 0; i < curr_size_; ++i) {
+            std::cout << array_[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void PrintReverse() {
+        for (size_t i = curr_size_; i > 0; --i) {
+            std::cout << array_[i - 1] << " ";
+        }
+        std::cout << std::endl;
     }
 
 private:
