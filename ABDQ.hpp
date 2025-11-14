@@ -11,7 +11,7 @@ class ABDQ : public DequeInterface<T>
 {
 public:
     ABDQ() : data_(new T[4]), capacity_(4), size_(0), front_(0), back_(0) {}
-    explicit ABQ(const size_t capacity) : capacity_(capacity), curr_size_(0)
+    explicit ABDQ(const size_t capacity) : capacity_(capacity), curr_size_(0)
     {
         array_ = new T[capacity_];
     }
