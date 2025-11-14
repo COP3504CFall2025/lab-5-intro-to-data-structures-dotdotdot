@@ -70,16 +70,42 @@ public:
         delete[] data_;
     }
 
-    void pushFront(const T &item)
+    void pushFront(const T &item) override
     {
-        ensureCapacity();
+        if (size_ >= capacity_)
+        {
+            std::size_t new_capacity = capacity_ * SCALE_FACTOR;
+            T *new_data = new T[new_capacity];
+            for (std::size_t i = 0; i < size_; ++i)
+            {
+                new_data[i] = data_[(front_ + i) % capacity_];
+            }
+            delete[] data_;
+            data_ = new_data;
+            capacity_ = new_capacity;
+            front_ = 0;
+            back_ = size_;
+        }
         front_ = (front_ - 1 + capacity_) % capacity_;
         data_[front_] = item;
         ++size_;
     }
-    void pushBack(const T &item)
+    void pushBack(const T &item) override
     {
-        ensureCapacity();
+        if (size_ >= capacity_)
+        {
+            std::size_t new_capacity = capacity_ * SCALE_FACTOR;
+            T *new_data = new T[new_capacity];
+            for (std::size_t i = 0; i < size_; ++i)
+            {
+                new_data[i] = data_[(front_ + i) % capacity_];
+            }
+            delete[] data_;
+            data_ = new_data;
+            capacity_ = new_capacity;
+            front_ = 0;
+            back_ = size_;
+        }
         data_[back_] = item;
         back_ = (back_ + 1) % capacity_;
         ++size_;
@@ -88,7 +114,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::out_of_range("Deque is empty");
+            throw std::runtime_error();
         }
         T value = data_[front_];
         front_ = (front_ + 1) % capacity_;
@@ -99,7 +125,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::out_of_range("Deque is empty");
+            throw std::runtime_error();
         }
         back_ = (back_ - 1 + capacity_) % capacity_;
         T value = data_[back_];
@@ -110,7 +136,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::out_of_range("Deque is empty");
+            throw std::runtime_error();
         }
         return data_[front_];
     }
@@ -118,7 +144,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::out_of_range("Deque is empty");
+            throw std::runtime_error();
         }
         std::size_t back_index = (back_ - 1 + capacity_) % capacity_;
         return data_[back_index];
@@ -152,21 +178,4 @@ private:
     std::size_t back_;
 
     static constexpr std::size_t SCALE_FACTOR = 2;
-    void ensureCapacity()
-    {
-        if (size_ >= capacity_)
-        {
-            std::size_t new_capacity = capacity_ * SCALE_FACTOR;
-            T *new_data = new T[new_capacity];
-            for (std::size_t i = 0; i < size_; ++i)
-            {
-                new_data[i] = data_[(front_ + i) % capacity_];
-            }
-            delete[] data_;
-            data_ = new_data;
-            capacity_ = new_capacity;
-            front_ = 0;
-            back_ = size_;
-        }
-    }
 };
