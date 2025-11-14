@@ -58,7 +58,7 @@ public:
 		}
 		count++;
 	};
-	void addTail(const T &data);
+	void addTail(const T &data)
 	{
 		Node<T> *newNode = new Node<T>{data, tail, nullptr};
 		if (tail)
@@ -174,7 +174,7 @@ public:
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node *head;
-	Node *tail;
+	Node<T> *head;
+	Node<T> *tail;
 	unsigned int count;
 };
