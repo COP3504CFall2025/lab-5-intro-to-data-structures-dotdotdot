@@ -114,7 +114,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::runtime_error();
+            throw std::runtime_error("");
         }
         T value = data_[front_];
         front_ = (front_ + 1) % capacity_;
@@ -125,7 +125,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::runtime_error();
+            throw std::runtime_error("");
         }
         back_ = (back_ - 1 + capacity_) % capacity_;
         T value = data_[back_];
@@ -136,7 +136,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::runtime_error();
+            throw std::runtime_error("");
         }
         return data_[front_];
     }
@@ -144,7 +144,7 @@ public:
     {
         if (size_ == 0)
         {
-            throw std::runtime_error();
+            throw std::runtime_error("");
         }
         std::size_t back_index = (back_ - 1 + capacity_) % capacity_;
         return data_[back_index];
