@@ -5,7 +5,6 @@
 #include <iostream>
 #include "Interfaces.hpp"
 
-// Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
 
 template <typename T>
@@ -116,6 +115,21 @@ public:
         }
         T value = array_[curr_size_ - 1];
         --curr_size_;
+        
+        if (capacity_ > 1 && curr_size_ * 4 <= capacity_)
+        {
+            size_t new_capacity = capacity_ / scale_factor_;
+            if (new_capacity < 1) new_capacity = 1;
+            T *new_array = new T[new_capacity];
+            for (size_t i = 0; i < curr_size_; ++i)
+            {
+                new_array[i] = array_[i];
+            }
+            delete[] array_;
+            array_ = new_array;
+            capacity_ = new_capacity;
+        }
+        
         return value;
     }
     
