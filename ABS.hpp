@@ -62,7 +62,7 @@ public:
         }
         return *this;
     }
-    ~ABS() noexcept {
+    ~ABS() noexcept override {
         delete[] array_;
     }
 
@@ -72,12 +72,12 @@ public:
     }
 
     // Get the max size of the ABS
-    [[nodiscard]] size_t getMaxCapacity() const noexcept {
+    [[nodiscard]] size_t getMaxCapacity() const noexcept override {
         return capacity_;
     }
 
     // Return underlying data for the stack
-    [[nodiscard]] T* getData() const noexcept {
+    [[nodiscard]] T* getData() const noexcept override {
         return array_;
     }
 

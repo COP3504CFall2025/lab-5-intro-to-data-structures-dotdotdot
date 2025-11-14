@@ -10,6 +10,12 @@ class StackInterface
     virtual T pop() = 0;
     virtual T peek() const = 0;
     virtual std::size_t getSize() const noexcept = 0;
+
+    virtual StackInterface<T>(const StackInterface<T> &other) = 0;
+    virtual StackInterface<T>(StackInterface<T> &&other) noexcept = 0;
+    virtual StackInterface<T> &operator=(const StackInterface<T> &other) = 0;
+    virtual StackInterface<T> &operator=(StackInterface<T> &&other) noexcept = 0;
+    virtual ~StackInterface() = 0;
 };
 
 template <typename T>
