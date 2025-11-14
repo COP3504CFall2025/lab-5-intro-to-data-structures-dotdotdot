@@ -14,14 +14,14 @@ class ABS : public StackInterface<T>
 public:
     ABS();
     explicit ABS(const size_t capacity);
-    ABS(const ABS& other);
-    ABS& operator=(const ABS& rhs);
-    ABS(ABS&& other) noexcept;
-    ABS& operator=(ABS&& rhs) noexcept;
+    ABS(const ABS &other);
+    ABS &operator=(const ABS &rhs);
+    ABS(ABS &&other) noexcept;
+    ABS &operator=(ABS &&rhs) noexcept;
     ~ABS();
 
     [[nodiscard]] size_t getSize() const noexcept override;
-    void push(const T& data) override;
+    void push(const T &data) override;
     T peek() const override;
     T pop() override;
     void PrintForward();

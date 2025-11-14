@@ -6,10 +6,11 @@
 #include <stdexcept>
 
 template <typename T>
-class LLQ : public QueueInterface<T> {
+class LLQ : public QueueInterface<T>
+{
 public:
     LLQ();
-    void enqueue(const T& item) override;
+    void enqueue(const T &item) override;
     T dequeue() override;
     T peek() const override;
     std::size_t getSize() const noexcept override;

@@ -5,13 +5,16 @@ template <typename T>
 LLQ<T>::LLQ() {}
 
 template <typename T>
-void LLQ<T>::enqueue(const T& item) {
+void LLQ<T>::enqueue(const T &item)
+{
     list.addTail(item);
 }
 
 template <typename T>
-T LLQ<T>::dequeue() {
-    if (list.getCount() == 0) {
+T LLQ<T>::dequeue()
+{
+    if (list.getCount() == 0)
+    {
         throw std::out_of_range("Queue is empty");
     }
     T value = list.getHead()->data;
@@ -20,24 +23,29 @@ T LLQ<T>::dequeue() {
 }
 
 template <typename T>
-T LLQ<T>::peek() const {
-    if (list.getCount() == 0) {
+T LLQ<T>::peek() const
+{
+    if (list.getCount() == 0)
+    {
         throw std::out_of_range("Queue is empty");
     }
     return list.getHead()->data;
 }
 
 template <typename T>
-std::size_t LLQ<T>::getSize() const noexcept {
+std::size_t LLQ<T>::getSize() const noexcept
+{
     return list.getCount();
 }
 
 template <typename T>
-void LLQ<T>::PrintForward() {
+void LLQ<T>::PrintForward()
+{
     list.printForward();
 }
 
 template <typename T>
-void LLQ<T>::PrintReverse() {
+void LLQ<T>::PrintReverse()
+{
     list.printReverse();
 }
