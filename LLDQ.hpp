@@ -21,7 +21,7 @@ public:
     void PrintReverse();
 
 private:
-    LinkedList<T> list;
+    LinkedList<T> list; 
 };
 
 

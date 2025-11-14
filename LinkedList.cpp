@@ -1,4 +1,5 @@
 #include "LinkedList.hpp"
+#include <iostream>
 
 template <typename T>
 void LinkedList<T>::printForward() const
