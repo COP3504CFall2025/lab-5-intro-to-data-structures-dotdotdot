@@ -8,38 +8,48 @@
 // Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
 
-template<typename T>
-class ABS : public StackInterface<T> {
+template <typename T>
+class ABS : public StackInterface<T>
+{
 public:
     ABS() : capacity_(1), curr_size_(0), array_(new T[1]) {}
-    explicit ABS(const size_t capacity) : capacity_(capacity), curr_size_(0) {
+    explicit ABS(const size_t capacity) : capacity_(capacity), curr_size_(0)
+    {
         array_ = new T[capacity_];
     }
-    ABS(const ABS& other) : capacity_(other.capacity_), curr_size_(other.curr_size_) {
+    ABS(const ABS &other) : capacity_(other.capacity_), curr_size_(other.curr_size_)
+    {
         array_ = new T[capacity_];
-        for (size_t i = 0; i < curr_size_; ++i) {
+        for (size_t i = 0; i < curr_size_; ++i)
+        {
             array_[i] = other.array_[i];
         }
     }
-    ABS& operator=(const ABS& rhs) {
-        if (this != &rhs) {
+    ABS &operator=(const ABS &rhs)
+    {
+        if (this != &rhs)
+        {
             delete[] array_;
             capacity_ = rhs.capacity_;
             curr_size_ = rhs.curr_size_;
             array_ = new T[capacity_];
-            for (size_t i = 0; i < curr_size_; ++i) {
+            for (size_t i = 0; i < curr_size_; ++i)
+            {
                 array_[i] = rhs.array_[i];
             }
         }
         return *this;
     }
-    ABS(ABS&& other) noexcept : capacity_(other.capacity_), curr_size_(other.curr_size_), array_(other.array_) {
+    ABS(ABS &&other) noexcept : capacity_(other.capacity_), curr_size_(other.curr_size_), array_(other.array_)
+    {
         other.capacity_ = 0;
         other.curr_size_ = 0;
         other.array_ = nullptr;
     }
-    ABS& operator=(ABS&& rhs) noexcept {
-        if (this != &rhs) {
+    ABS &operator=(ABS &&rhs) noexcept
+    {
+        if (this != &rhs)
+        {
             delete[] array_;
             capacity_ = rhs.capacity_;
             curr_size_ = rhs.curr_size_;
@@ -50,20 +60,25 @@ public:
         }
         return *this;
     }
-    ~ABS() {
+    ~ABS()
+    {
         delete[] array_;
     }
 
-    [[nodiscard]] size_t getSize() const noexcept override {
+    [[nodiscard]] size_t getSize() const noexcept override
+    {
         return curr_size_;
     }
 
     // Push item onto the stack
-    void push(const T& data) override {
-        if (curr_size_ >= capacity_) {
+    void push(const T &data) override
+    {
+        if (curr_size_ >= capacity_)
+        {
             size_t new_capacity = (capacity_ == 0) ? 1 : capacity_ * scale_factor_;
-            T* new_array = new T[new_capacity];
-            for (size_t i = 0; i < curr_size_; ++i) {
+            T *new_array = new T[new_capacity];
+            for (size_t i = 0; i < curr_size_; ++i)
+            {
                 new_array[i] = array_[i];
             }
             delete[] array_;
@@ -74,15 +89,19 @@ public:
         ++curr_size_;
     }
 
-    T peek() const override {
-        if (curr_size_ == 0) {
+    T peek() const override
+    {
+        if (curr_size_ == 0)
+        {
             throw std::out_of_range("Stack is empty");
         }
         return array_[curr_size_ - 1];
     }
 
-    T pop() override {
-        if (curr_size_ == 0) {
+    T pop() override
+    {
+        if (curr_size_ == 0)
+        {
             throw std::out_of_range("Stack is empty");
         }
         T value = array_[curr_size_ - 1];
@@ -90,15 +109,19 @@ public:
         return value;
     }
 
-    void PrintForward() {
-        for (size_t i = 0; i < curr_size_; ++i) {
+    void PrintForward()
+    {
+        for (size_t i = 0; i < curr_size_; ++i)
+        {
             std::cout << array_[i] << " ";
         }
         std::cout << std::endl;
     }
 
-    void PrintReverse() {
-        for (size_t i = curr_size_; i > 0; --i) {
+    void PrintReverse()
+    {
+        for (size_t i = curr_size_; i > 0; --i)
+        {
             std::cout << array_[i - 1] << " ";
         }
         std::cout << std::endl;
@@ -107,6 +130,6 @@ public:
 private:
     size_t capacity_;
     size_t curr_size_;
-    T* array_;
+    T *array_;
     static constexpr size_t scale_factor_ = 2;
 };

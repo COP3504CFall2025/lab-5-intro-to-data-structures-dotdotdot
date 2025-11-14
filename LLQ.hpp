@@ -6,18 +6,23 @@
 #include <stdexcept>
 
 template <typename T>
-class LLQ : public QueueInterface<T> {
+class LLQ : public QueueInterface<T>
+{
 private:
     LinkedList<T> list;
+
 public:
     LLQ() {}
 
-    void enqueue(const T& item) override {
+    void enqueue(const T &item) override
+    {
         list.addTail(item);
     }
 
-    T dequeue() override {
-        if (list.getCount() == 0) {
+    T dequeue() override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Queue is empty");
         }
         T value = list.getHead()->data;
@@ -25,22 +30,27 @@ public:
         return value;
     }
 
-    T peek() const override {
-        if (list.getCount() == 0) {
+    T peek() const override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Queue is empty");
         }
         return list.getHead()->data;
     }
 
-    std::size_t getSize() const noexcept override {
+    std::size_t getSize() const noexcept override
+    {
         return list.getCount();
     }
 
-    void PrintForward() {
+    void PrintForward()
+    {
         list.printForward();
     }
 
-    void PrintReverse() {
+    void PrintReverse()
+    {
         list.printReverse();
     }
 };

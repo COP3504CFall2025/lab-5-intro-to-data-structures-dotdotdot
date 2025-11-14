@@ -7,9 +7,10 @@
 #include <utility>
 
 template <typename T>
-class ABDQ : public DequeInterface<T> {
+class ABDQ : public DequeInterface<T>
+{
 private:
-    T* data_;
+    T *data_;
     std::size_t capacity_;
     std::size_t size_;
     std::size_t front_;
@@ -17,11 +18,14 @@ private:
 
     static constexpr std::size_t SCALE_FACTOR = 2;
 
-    void ensureCapacity() {
-        if (size_ >= capacity_) {
+    void ensureCapacity()
+    {
+        if (size_ >= capacity_)
+        {
             std::size_t new_capacity = capacity_ * SCALE_FACTOR;
-            T* new_data = new T[new_capacity];
-            for (std::size_t i = 0; i < size_; ++i) {
+            T *new_data = new T[new_capacity];
+            for (std::size_t i = 0; i < size_; ++i)
+            {
                 new_data[i] = data_[(front_ + i) % capacity_];
             }
             delete[] data_;
@@ -37,13 +41,16 @@ public:
 
     explicit ABDQ(std::size_t capacity) : data_(new T[capacity]), capacity_(capacity), size_(0), front_(0), back_(0) {}
 
-    ABDQ(const ABDQ& other) : data_(new T[other.capacity_]), capacity_(other.capacity_), size_(other.size_), front_(0), back_(other.size_) {
-        for (std::size_t i = 0; i < size_; ++i) {
+    ABDQ(const ABDQ &other) : data_(new T[other.capacity_]), capacity_(other.capacity_), size_(other.size_), front_(0), back_(other.size_)
+    {
+        for (std::size_t i = 0; i < size_; ++i)
+        {
             data_[i] = other.data_[(other.front_ + i) % other.capacity_];
         }
     }
 
-    ABDQ(ABDQ&& other) noexcept : data_(other.data_), capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_) {
+    ABDQ(ABDQ &&other) noexcept : data_(other.data_), capacity_(other.capacity_), size_(other.size_), front_(other.front_), back_(other.back_)
+    {
         other.data_ = nullptr;
         other.capacity_ = 0;
         other.size_ = 0;
@@ -51,23 +58,28 @@ public:
         other.back_ = 0;
     }
 
-    ABDQ& operator=(const ABDQ& other) {
-        if (this != &other) {
+    ABDQ &operator=(const ABDQ &other)
+    {
+        if (this != &other)
+        {
             delete[] data_;
             data_ = new T[other.capacity_];
             capacity_ = other.capacity_;
             size_ = other.size_;
             front_ = 0;
             back_ = other.size_;
-            for (std::size_t i = 0; i < size_; ++i) {
+            for (std::size_t i = 0; i < size_; ++i)
+            {
                 data_[i] = other.data_[(other.front_ + i) % other.capacity_];
             }
         }
         return *this;
     }
 
-    ABDQ& operator=(ABDQ&& other) noexcept {
-        if (this != &other) {
+    ABDQ &operator=(ABDQ &&other) noexcept
+    {
+        if (this != &other)
+        {
             delete[] data_;
             data_ = other.data_;
             capacity_ = other.capacity_;
@@ -83,26 +95,31 @@ public:
         return *this;
     }
 
-    ~ABDQ() {
+    ~ABDQ()
+    {
         delete[] data_;
     }
 
-    void pushFront(const T& item) override {
+    void pushFront(const T &item) override
+    {
         ensureCapacity();
         front_ = (front_ - 1 + capacity_) % capacity_;
         data_[front_] = item;
         ++size_;
     }
 
-    void pushBack(const T& item) override {
+    void pushBack(const T &item) override
+    {
         ensureCapacity();
         data_[back_] = item;
         back_ = (back_ + 1) % capacity_;
         ++size_;
     }
 
-    T popFront() override {
-        if (size_ == 0) {
+    T popFront() override
+    {
+        if (size_ == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         T value = data_[front_];
@@ -111,8 +128,10 @@ public:
         return value;
     }
 
-    T popBack() override {
-        if (size_ == 0) {
+    T popBack() override
+    {
+        if (size_ == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         back_ = (back_ - 1 + capacity_) % capacity_;
@@ -121,34 +140,43 @@ public:
         return value;
     }
 
-    const T& front() const override {
-        if (size_ == 0) {
+    const T &front() const override
+    {
+        if (size_ == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         return data_[front_];
     }
 
-    const T& back() const override {
-        if (size_ == 0) {
+    const T &back() const override
+    {
+        if (size_ == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         std::size_t back_index = (back_ - 1 + capacity_) % capacity_;
         return data_[back_index];
     }
 
-    std::size_t getSize() const noexcept override {
+    std::size_t getSize() const noexcept override
+    {
         return size_;
     }
 
-    void PrintForward() {
-        for (std::size_t i = 0; i < size_; ++i) {
+    void PrintForward()
+    {
+        for (std::size_t i = 0; i < size_; ++i)
+        {
             std::cout << data_[(front_ + i) % capacity_] << " ";
         }
         std::cout << std::endl;
     }
 
-    void PrintReverse() {
-        for (std::size_t i = size_; i > 0; --i) {
+    void PrintReverse()
+    {
+        for (std::size_t i = size_; i > 0; --i)
+        {
             std::cout << data_[(front_ + i - 1) % capacity_] << " ";
         }
         std::cout << std::endl;

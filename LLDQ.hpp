@@ -7,23 +7,28 @@
 #include <utility>
 
 template <typename T>
-class LLDQ : public DequeInterface<T> {
+class LLDQ : public DequeInterface<T>
+{
 private:
     LinkedList<T> list;
 
 public:
     LLDQ() {}
 
-    void pushFront(const T& item) override {
+    void pushFront(const T &item) override
+    {
         list.addHead(item);
     }
 
-    void pushBack(const T& item) override {
+    void pushBack(const T &item) override
+    {
         list.addTail(item);
     }
 
-    T popFront() override {
-        if (list.getCount() == 0) {
+    T popFront() override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         T value = list.getHead()->data;
@@ -31,8 +36,10 @@ public:
         return value;
     }
 
-    T popBack() override {
-        if (list.getCount() == 0) {
+    T popBack() override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         T value = list.getTail()->data;
@@ -40,35 +47,36 @@ public:
         return value;
     }
 
-    const T& front() const override {
-        if (list.getCount() == 0) {
+    const T &front() const override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         return list.getHead()->data;
     }
 
-    const T& back() const override {
-        if (list.getCount() == 0) {
+    const T &back() const override
+    {
+        if (list.getCount() == 0)
+        {
             throw std::out_of_range("Deque is empty");
         }
         return list.getTail()->data;
     }
 
-    std::size_t getSize() const noexcept override {
+    std::size_t getSize() const noexcept override
+    {
         return list.getCount();
     }
 
-    void PrintForward() {
+    void PrintForward()
+    {
         list.printForward();
     }
 
-    void PrintReverse() {
+    void PrintReverse()
+    {
         list.printReverse();
     }
 };
-
-
-
-
-
-
