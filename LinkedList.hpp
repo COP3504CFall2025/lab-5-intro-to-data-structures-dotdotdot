@@ -110,7 +110,7 @@ public:
 		count--;
 		return true;
 	};
-	void Clear()
+	void clear()
 	{
 		while (removeHead())
 		{
@@ -122,7 +122,7 @@ public:
 	{
 		if (this != &other)
 		{
-			Clear();
+			clear();
 			head = other.head;
 			tail = other.tail;
 			count = other.count;
@@ -136,7 +136,7 @@ public:
 	{
 		if (this != &rhs)
 		{
-			Clear();
+			clear();
 			Node<T> *current = rhs.head;
 			while (current)
 			{
@@ -169,7 +169,7 @@ public:
 	};
 	~LinkedList()
 	{
-		Clear();
+		clear();
 	};
 
 private:
