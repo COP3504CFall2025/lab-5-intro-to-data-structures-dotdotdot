@@ -38,5 +38,4 @@ private:
     void ensureCapacity();
 };
 
-// Include implementation
 #include "ABDQ.cpp"

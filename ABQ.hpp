@@ -32,5 +32,4 @@ private:
     static constexpr size_t scale_factor_ = 2;
 };
 
-// Include implementation
 #include "ABQ.cpp"

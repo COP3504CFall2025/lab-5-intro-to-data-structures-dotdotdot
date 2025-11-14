@@ -24,7 +24,6 @@ private:
     LinkedList<T> list;
 };
 
-// Include implementation
 #include "LLDQ.cpp"
 
 
