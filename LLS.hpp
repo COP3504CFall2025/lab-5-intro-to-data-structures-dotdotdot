@@ -2,7 +2,6 @@
 
 #include "Interfaces.hpp"
 #include "LinkedList.hpp"
-#include <stdlib.h>
 #include <stdexcept>
 
 template <typename T>
