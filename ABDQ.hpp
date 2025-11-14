@@ -38,5 +38,3 @@ private:
     static constexpr std::size_t SCALE_FACTOR = 2;
     void ensureCapacity();
 };
-
-#include "ABDQ.cpp"

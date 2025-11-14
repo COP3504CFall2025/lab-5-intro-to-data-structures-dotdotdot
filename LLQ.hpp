@@ -20,5 +20,3 @@ public:
 private:
     LinkedList<T> list;
 };
-
-#include "LLQ.cpp"

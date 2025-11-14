@@ -50,6 +50,3 @@ private:
 	Node<T> *tail;
 	unsigned int count;
 };
-
-// Include implementation
-#include "LinkedList.cpp"

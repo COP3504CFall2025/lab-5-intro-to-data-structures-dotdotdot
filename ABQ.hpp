@@ -32,5 +32,3 @@ private:
     T *array_;
     static constexpr size_t scale_factor_ = 2;
 };
-
-#include "ABQ.cpp"
