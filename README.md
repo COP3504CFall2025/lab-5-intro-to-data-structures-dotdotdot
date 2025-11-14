@@ -63,6 +63,7 @@ These define *behavioral contracts* for data structure interactions.
 Defines standard **LIFO** (Last-In-First-Out) operations:
 
 ```cpp
++
 void push(const T& item);
 T pop();
 T peek() const;
