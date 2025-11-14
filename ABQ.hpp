@@ -28,7 +28,7 @@ public:
 private:
     size_t capacity_;
     size_t curr_size_;
-    T* array_;
+    T *array_;
     static constexpr size_t scale_factor_ = 2;
 };
 

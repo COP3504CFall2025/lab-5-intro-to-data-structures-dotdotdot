@@ -28,7 +28,7 @@ public:
     void PrintReverse();
 
 private:
-    T* data_;
+    T *data_;
     std::size_t capacity_;
     std::size_t size_;
     std::size_t front_;

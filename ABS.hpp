@@ -8,8 +8,9 @@
 // Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
 
-template<typename T>
-class ABS : public StackInterface<T> {
+template <typename T>
+class ABS : public StackInterface<T>
+{
 public:
     ABS();
     explicit ABS(const size_t capacity);
@@ -29,7 +30,7 @@ public:
 private:
     size_t capacity_;
     size_t curr_size_;
-    T* array_;
+    T *array_;
     static constexpr size_t scale_factor_ = 2;
 };
 
