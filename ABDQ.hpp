@@ -153,6 +153,12 @@ public:
     {
         return size_;
     }
+    
+    std::size_t getMaxCapacity() const noexcept
+    {
+        return capacity_;
+    }
+    
     void PrintForward()
     {
         for (std::size_t i = 0; i < size_; ++i)

@@ -76,6 +76,11 @@ public:
         return curr_size_;
     }
     
+    [[nodiscard]] size_t getMaxCapacity() const noexcept
+    {
+        return capacity_;
+    }
+    
     void push(const T &data) override
     {
         if (curr_size_ >= capacity_)
