@@ -1,4 +1,3 @@
-#pragma once
 #include "LLQ.hpp"
 
 template <typename T>

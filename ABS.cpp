@@ -1,4 +1,3 @@
-#pragma once
 #include "ABS.hpp"
 
 template <typename T>

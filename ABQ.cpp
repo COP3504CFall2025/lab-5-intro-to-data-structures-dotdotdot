@@ -1,4 +1,3 @@
-#pragma once
 #include "ABQ.hpp"
 
 template <typename T>
