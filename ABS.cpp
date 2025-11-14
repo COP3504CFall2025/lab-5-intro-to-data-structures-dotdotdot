@@ -1,4 +1,5 @@
 #include "ABS.hpp"
+#include <stdexcept>
 
 template <typename T>
 ABS<T>::ABS() : capacity_(1), curr_size_(0), array_(new T[1]) {}
@@ -96,7 +97,7 @@ T ABS<T>::peek() const
 {
     if (curr_size_ == 0)
     {
-        throw std::out_of_range("Stack is empty");
+        throw std::runtime_error("Stack is empty");
     }
     return array_[curr_size_ - 1];
 }
@@ -106,7 +107,7 @@ T ABS<T>::pop()
 {
     if (curr_size_ == 0)
     {
-        throw std::out_of_range("Stack is empty");
+        throw std::runtime_error("Stack is empty");
     }
     T value = array_[curr_size_ - 1];
     --curr_size_;
